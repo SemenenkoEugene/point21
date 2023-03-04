@@ -19,6 +19,6 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card{" + index.getValue() + "-" + suit.getValue() + '}';
+        return index.getString() + suit.getValue();
     }
 }

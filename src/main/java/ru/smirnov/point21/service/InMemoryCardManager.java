@@ -36,4 +36,10 @@ public class InMemoryCardManager implements CardRepository {
     public void shuffle() {
         Collections.shuffle(cards);
     }
+
+    @Override
+    public int size() {
+        removeCard();
+        return cards.size();
+    }
 }

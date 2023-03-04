@@ -1,7 +1,6 @@
 package ru.smirnov.point21;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ru.smirnov.point21.model.Index;
 import ru.smirnov.point21.model.Player;
 import ru.smirnov.point21.repository.CardRepository;
 import ru.smirnov.point21.service.InMemoryCardManager;
@@ -19,10 +18,11 @@ public class Point21Application {
     public static void startGame(CardRepository cardRepository) throws InterruptedException {
         Player player = new Player();
         Player comp = new Player();
+        InMemoryCardManager inMemoryCardManager = new InMemoryCardManager();
         Scanner scanner = new Scanner(System.in);
         int answer;
 
-        System.out.println("Игра началась!");
+        System.out.println("\033[0;100m" + "Игра началась!" + "\033[0m");
         do {
             player.clearCards();
             comp.clearCards();
@@ -34,13 +34,15 @@ public class Point21Application {
                 System.out.println("Ваши карты: " + player.getCards());
                 System.out.println("Сумма очков: " + player.sum());
                 System.out.println();
+                TimeUnit.SECONDS.sleep(1);
                 if (isLose(player.sum())) {
                     System.out.println("Перебор!");
                     break;
                 }
-                System.out.println("Ещё? (Нажмите: 1 - да, 2 - нет)");
+                System.out.println("Ещё? (Нажмите: 1 - " + "\033[0;32m" + "да\033[0m" + ", 2 - " + "\033[0;31m" + "нет" + "\033[0m" + ")");
                 answer = scanner.nextInt();
             } while (answer != 2);
+            System.out.println("Количество карт в колоде: \033[0;34m" + inMemoryCardManager.size()+"\033[0m");
 
             if (player.sum() <= 21) {
                 System.out.println("Ход компьютера");
@@ -56,6 +58,7 @@ public class Point21Application {
             }
 
             checkWinner(player, comp);
+            System.out.println("Количество карт в колоде: " + inMemoryCardManager.size());
 
             System.out.println("Продолжить играть? (Нажмите: 1 - да, 2 - нет)");
             int ans = scanner.nextInt();

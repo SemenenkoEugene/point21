@@ -1,18 +1,18 @@
 package ru.smirnov.point21.model;
 
 public enum Suit {
-    CROSSES('♠'),
-    HEARTS('♥'),
-    DIAMONDS('♦'),
-    SPADES('♣');
+    CROSSES("\033[0;30m♠\033[0m"),
+    HEARTS("\033[0;31m♥\033[0m"),
+    DIAMONDS("\033[0;31m♦\033[0m"),
+    SPADES("\033[0;30m♣\033[0m");
 
-    private final  char value;
+    private final String value;
 
-    Suit(char value) {
+    Suit(String value) {
         this.value = value;
     }
 
-    public char getValue() {
+    public String getValue() {
         return value;
     }
 }

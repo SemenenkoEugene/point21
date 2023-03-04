@@ -8,4 +8,6 @@ public interface CardRepository {
     void removeCard();
 
     void shuffle();
+
+    int size();
 }
